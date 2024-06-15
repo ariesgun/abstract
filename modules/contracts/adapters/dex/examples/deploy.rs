@@ -31,7 +31,7 @@ fn deploy_dex(network: ChainInfo) -> anyhow::Result<()> {
     let dex = DexAdapter::new(DEX_ADAPTER_ID, chain.clone());
 
     let abstract_client: AbstractClient<Daemon> = AbstractClient::new(chain.clone())?;
-    let publisher: Publisher<_> = abstract_client.publisher_builder(Namespace::from_id("xenosgeck:dex")?).build()?;
+    let publisher: Publisher<_> = abstract_client.publisher_builder(Namespace::from_id("xenosgeck:dex1")?).build()?;
 
     publisher.publish_adapter::<DexInstantiateMsg, DexAdapter<Daemon>>(
         DexInstantiateMsg {
