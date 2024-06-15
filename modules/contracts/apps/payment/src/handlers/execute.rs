@@ -10,7 +10,7 @@ use abstract_app::std::{
     ans_host::AssetPairingMapEntry,
     objects::{AnsAsset, AssetEntry, DexName},
 };
-use abstract_dex_adapter::DexInterface;
+use abstract_dex_adapter::DexInterface2;
 use cosmwasm_std::{
     Addr, CosmosMsg, Decimal, DepsMut, Env, MessageInfo, Response, Storage, Uint128,
 };

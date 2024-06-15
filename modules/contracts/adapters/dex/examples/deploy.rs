@@ -4,6 +4,7 @@ use cosmwasm_std::Decimal;
 use cw_orch::daemon::networks::parse_network;
 use cw_orch::prelude::*;
 use semver::Version;
+use abstract_client::{AbstractClient, Account, AccountSource, Application, ClientResolve, Namespace, Publisher};
 
 use networks::{archway::ARCHWAY_NETWORK, ChainKind};
 
@@ -27,15 +28,18 @@ fn deploy_dex(network: ChainInfo) -> anyhow::Result<()> {
         .handle(rt.handle())
         .chain(CONSTANTINE_3)
         .build()?;
-    let dex = DexAdapter::new(DEX_ADAPTER_ID, chain);
-    dex.deploy(
-        version,
+    let dex = DexAdapter::new(DEX_ADAPTER_ID, chain.clone());
+
+    let abstract_client: AbstractClient<Daemon> = AbstractClient::new(chain.clone())?;
+    let publisher: Publisher<_> = abstract_client.publisher_builder(Namespace::from_id("xenosgeck:dex")?).build()?;
+
+    publisher.publish_adapter::<DexInstantiateMsg, DexAdapter<Daemon>>(
         DexInstantiateMsg {
             swap_fee: Decimal::percent(1),
             recipient_account: 0,
-        },
-        DeployStrategy::Try,
+        }
     )?;
+
     Ok(())
 }
 

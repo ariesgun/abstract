@@ -18,7 +18,7 @@ use self::{ans::AnsDex, raw::Dex};
 
 // API for Abstract SDK users
 /// Interact with the dex adapter in your module.
-pub trait DexInterface: AccountIdentification + Dependencies + ModuleIdentification {
+pub trait DexInterface2: AccountIdentification + Dependencies + ModuleIdentification {
     /// Construct a new dex interface.
     fn dex<'a>(&'a self, deps: Deps<'a>, name: DexName) -> Dex<Self> {
         Dex {
@@ -39,20 +39,20 @@ pub trait DexInterface: AccountIdentification + Dependencies + ModuleIdentificat
     }
 }
 
-impl<T: AccountIdentification + Dependencies + ModuleIdentification> DexInterface for T {}
+impl<T: AccountIdentification + Dependencies + ModuleIdentification> DexInterface2 for T {}
 
 pub mod raw {
     use super::*;
 
     #[derive(Clone)]
-    pub struct Dex<'a, T: DexInterface> {
+    pub struct Dex<'a, T: DexInterface2> {
         pub(crate) base: &'a T,
         pub(crate) name: DexName,
         pub(crate) module_id: ModuleId<'a>,
         pub(crate) deps: Deps<'a>,
     }
 
-    impl<'a, T: DexInterface> Dex<'a, T> {
+    impl<'a, T: DexInterface2> Dex<'a, T> {
         /// Set the module id for the DEX
         pub fn with_module_id(self, module_id: ModuleId<'a>) -> Self {
             Self { module_id, ..self }
@@ -150,7 +150,7 @@ pub mod raw {
         }
     }
 
-    impl<'a, T: DexInterface> Dex<'a, T> {
+    impl<'a, T: DexInterface2> Dex<'a, T> {
         /// Do a query in the DEX
         fn query<R: DeserializeOwned>(&self, query_msg: DexQueryMsg) -> AbstractSdkResult<R> {
             let adapters = self.base.adapters(self.deps);
@@ -206,14 +206,14 @@ pub mod ans {
     use super::*;
 
     #[derive(Clone)]
-    pub struct AnsDex<'a, T: DexInterface> {
+    pub struct AnsDex<'a, T: DexInterface2> {
         pub(crate) base: &'a T,
         pub(crate) name: DexName,
         pub(crate) module_id: ModuleId<'a>,
         pub(crate) deps: Deps<'a>,
     }
 
-    impl<'a, T: DexInterface> AnsDex<'a, T> {
+    impl<'a, T: DexInterface2> AnsDex<'a, T> {
         /// Set the module id for the DEX
         pub fn with_module_id(self, module_id: ModuleId<'a>) -> Self {
             Self { module_id, ..self }
@@ -295,7 +295,7 @@ pub mod ans {
         }
     }
 
-    impl<'a, T: DexInterface> AnsDex<'a, T> {
+    impl<'a, T: DexInterface2> AnsDex<'a, T> {
         /// Do a query in the DEX
         fn query<R: DeserializeOwned>(&self, query_msg: DexQueryMsg) -> AbstractSdkResult<R> {
             let adapters = self.base.adapters(self.deps);
