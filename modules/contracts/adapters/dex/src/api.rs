@@ -25,7 +25,7 @@ pub trait DexInterface2: AccountIdentification + Dependencies + ModuleIdentifica
             base: self,
             deps,
             name,
-            module_id: DEX_ADAPTER_ID,
+            module_id: "xenosgeck:dex",
         }
     }
     /// Construct a new dex interface with ANS support.
@@ -34,7 +34,7 @@ pub trait DexInterface2: AccountIdentification + Dependencies + ModuleIdentifica
             base: self,
             deps,
             name,
-            module_id: DEX_ADAPTER_ID,
+            module_id: "xenosgeck:dex",
         }
     }
 }
