@@ -10,7 +10,7 @@ pub mod msg {
 pub use abstract_dex_standard::DEX_ADAPTER_ID;
 
 // Export interface for use in SDK modules
-pub use crate::api::DexInterface;
+pub use crate::api::DexInterface2;
 
 #[cfg(any(feature = "juno", feature = "osmosis"))]
 pub mod host_exchange {

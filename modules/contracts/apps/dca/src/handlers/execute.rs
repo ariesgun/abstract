@@ -5,7 +5,7 @@ use abstract_app::sdk::{
     AbstractSdkResult,
 };
 use abstract_app::std::objects::{AnsAsset, AssetEntry, DexName};
-use abstract_dex_adapter::api::DexInterface;
+use abstract_dex_adapter::api::DexInterface2;
 use cosmwasm_std::{wasm_execute, CosmosMsg, Decimal, DepsMut, Env, MessageInfo, Uint128};
 use croncat_app::{
     croncat_integration_utils::{CronCatAction, CronCatTaskRequest},
