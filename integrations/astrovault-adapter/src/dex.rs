@@ -34,9 +34,9 @@ use {
 // TODO: those won't work on testnet
 // Also note that we can't edit addresses without migration with current implementation
 pub const STANDARD_POOL_FACTORY: &str =
-    "archway1cq6tgc32az7zpq5w7t2d89taekkn9q95g2g79ka6j46ednw7xkkq7n55a2";
+    "archway1ne86kmyx369qex266kuf062y0lzd86ruhr3l22l9ue85f6wl3ynqfy6f2q";
 pub const STABLE_POOL_FACTORY: &str =
-    "archway19yzx44k7w7gsjjhumkd4sh9r0z6lscq583hgpu9s4yyl00z9lahq0ptra0";
+    "archway1slxn0e464njg0f3dca9lug7kcacg0s9g3mf482ghe6t8qc5lmctszmth8m";
 pub const RATIO_POOL_FACTORY: &str =
     "archway1zlc00gjw4ecan3tkk5g0lfd78gyfldh4hvkv2g8z5qnwlkz9vqmsdfvs7q";
 

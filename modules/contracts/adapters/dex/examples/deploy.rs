@@ -5,14 +5,27 @@ use cw_orch::daemon::networks::parse_network;
 use cw_orch::prelude::*;
 use semver::Version;
 
+use networks::{archway::ARCHWAY_NETWORK, ChainKind};
+
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
+
+pub const CONSTANTINE_3: ChainInfo = ChainInfo {
+    kind: ChainKind::Testnet,
+    chain_id: "constantine-3",
+    gas_denom: "aconst",
+    gas_price: 1000000000000.0,
+    grpc_urls: &["https://grpc.constantine.archway.io:443"],
+    network_info: ARCHWAY_NETWORK,
+    lcd_url: Some("https://api.constantine.archway.io"),
+    fcd_url: None,
+};
 
 fn deploy_dex(network: ChainInfo) -> anyhow::Result<()> {
     let rt = Runtime::new()?;
     let version: Version = CONTRACT_VERSION.parse().unwrap();
     let chain = DaemonBuilder::default()
         .handle(rt.handle())
-        .chain(network)
+        .chain(CONSTANTINE_3)
         .build()?;
     let dex = DexAdapter::new(DEX_ADAPTER_ID, chain);
     dex.deploy(
